@@ -12,6 +12,9 @@ import (
 	"os"
 	"time"
 
+	"net/http"
+	"crypto/tls"
+
 	"bench"
 )
 
@@ -32,6 +35,7 @@ var (
 
 func main() {
 	flag.Parse()
+	http.DefaultTransport.(*http.Transport).TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	var err error
 	if *result != "" {
 		out, err = os.Create(*result)

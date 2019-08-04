@@ -16,6 +16,7 @@ import (
 	"sync/atomic"
 	"time"
 	"unicode/utf8"
+	"crypto/tls"
 
 	"bench/urlcache"
 
@@ -155,6 +156,7 @@ func NewClient(base, bankid, name, password string, timeout, retire time.Duratio
 		return nil, errors.Wrapf(err, "cookiejar.New Failed.")
 	}
 	transport := &http.Transport{}
+	transport.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
 	hc := &http.Client{
 		Jar:       jar,
 		Transport: transport,
