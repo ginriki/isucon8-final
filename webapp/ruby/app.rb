@@ -16,6 +16,11 @@ module Isucoin
     set :public_folder, ENV.fetch('ISU_PUBLIC_DIR', File.join(__dir__, '..', 'public'))
     set :sessions, key: 'isucoin_session', expire_after: 3600
     set :session_secret, 'tonymoris'
+
+    # ssl証明書切れ(?)でajax通信エラー起きてるので、外す
+    # https://github.com/sinatra/sinatra/blob/master/rack-protection/lib/rack/protection.rb
+    set :protection, :except => [:http_origin, :frame_options, :ip_spoofing, :json_csrf, :path_traversal, :remote_token, :session_hijacking, :xss_header]
+
     # ISUCON用初期データの基準時間です
     # この時間以降のデータはinitializeで削除されます
     set :base_time, Time.new(2018, 10, 16, 10, 0, 0)

@@ -40,6 +40,7 @@ class Isulogger
     req['Authorization'] = "Bearer #{app_id}"
 
     http = Net::HTTP.new(endpoint.host, endpoint.port)
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     http.use_ssl = endpoint.scheme == 'https'
     res = http.start { http.request(req) }
 
