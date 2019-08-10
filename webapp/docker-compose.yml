@@ -4,6 +4,7 @@ services:
     image: nginx:1.15.3-alpine
     volumes:
       - ./nginx:/etc/nginx
+      - ./logs/nginx:/var/log/nginx
     ports:
       - "443:443"
     links:
@@ -32,6 +33,7 @@ services:
       - mysql:/var/lib/mysql
       - ./sql:/docker-entrypoint-initdb.d
       - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./logs/mysql:/var/log/mysql
     # development only
     ports:
       - "13306:3306"
