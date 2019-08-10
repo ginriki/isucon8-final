@@ -29,6 +29,7 @@ class Isulogger
         $response = $client->request('POST', $p, [
             'headers' => ['Authorization' => 'Bearer '.$this->app_id],
             'json' => $v,
+            'verify' => false,
         ]);
         if ($response->getStatusCode() === 200) {
             return;

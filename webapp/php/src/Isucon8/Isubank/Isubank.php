@@ -93,6 +93,7 @@ class Isubank
             'headers' => ['Authorization' => 'Bearer '.$this->app_id],
             'http_errors' => false,
             'json' => $v,
+            'verify' => false,
         ]);
         $data = json_decode($response->getBody(), true);
         $data['success'] = $response->getStatusCode() === 200;
