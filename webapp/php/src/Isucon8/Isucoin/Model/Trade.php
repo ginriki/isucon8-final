@@ -36,7 +36,7 @@ function GetTradeByID(PDOWrapper $dbh, int $id): JsonableTrade {
 }
 
 function GetLatestTrade(PDOWrapper $dbh): JsonableTrade {
-    return reformTrade($dbh->select_row('SELECT * FROM trade ORDER BY id DESC'));
+    return reformTrade($dbh->select_row('SELECT * FROM trade ORDER BY id DESC LIMIT 1'));
 }
 
 function GetCandlestickData(PDOWrapper $dbh, DateTime $mt, string $tf): array {
